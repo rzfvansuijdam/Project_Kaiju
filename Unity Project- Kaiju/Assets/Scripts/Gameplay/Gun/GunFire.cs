@@ -16,6 +16,7 @@ public class GunFire : MonoBehaviour
 
     [SerializeField] private float damagePerShot;
     [SerializeField] private float fireRatePerSecond;
+    [SerializeField] private float maxDistance;
 
     private AudioManager audioManager;
 
@@ -40,7 +41,7 @@ public class GunFire : MonoBehaviour
     private void Pew()
     {
         shootEffect.Play();
-        if (Physics.Raycast(muzzlePoint.position, muzzlePoint.forward, out _hit, Mathf.Infinity, shootAbleLayer))
+        if (Physics.Raycast(muzzlePoint.position, muzzlePoint.forward, out _hit, maxDistance, shootAbleLayer))
         {
             var enemy = _hit.transform.GetComponentInParent<EnemyHealth>();
             if(enemy != null && enemy.CompareTag("Enemy"))
